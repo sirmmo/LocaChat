@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LocaChat</title>
+		<script src="compact.js"></script>
+		<script id="user" type="text/html">
+			<div class="li">
+				<div class="icon {{status}}"></div><p class="name" data-userid="{{userid}}" >{{ name }}</p>
+			</div>
+		</script>
+		<script>
+		$.OLResize = function(){
+			$('#map').width($(window).width());
+		}
+		
+		$.setCenter = function(lon, lat){
+			console.debug(lon);
+			console.debug(lat);
+			$.OLMap.setCenter(
+	                new OpenLayers.LonLat(lon, lat).transform(
+	                    new OpenLayers.Projection("EPSG:4326"),
+	                    $.OLMap.getProjectionObject()
+	                ), 17
+	            );
+		}
+		
+		$(function(){
+			$.OLMap = new OpenLayers.Map({
+				div:'map',
+				controls:[]
+			});
+			$.OLMap.addLayer(new OpenLayers.Layer.OSM());
+			$.OLResize();
+			$(window).resize($.OLResize);
+			
+			$('#nearby .li').live('click', function(){
+				//trigger get_files
+			});
+			
+			$('#fr .li').live('click', function(){
+				
+				//trigger add-friend
+			});
+			
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#nearby').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#fr').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#fr').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#fr').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+			$('#fr').append(ich.user({name:'Monta', userid:'marco.montanari@gmail.com', status:"friend"}));
+		});
+	
+		</script>
+		<style>
+			#map{
+				height:100px;
+			}
+			body{
+				margin: 0 0 0 0;
+			}
+			#nearby-title{
+				width:100%;
+				height:20px;
+				text-align:  center;
+				background-color:#ffaadd;
+				display:block;
+			}
+			
+			
+			#fr-title{
+				width:100%;
+				height:20px;
+				text-align:  center;
+				background-color:#ddffaa;
+				display:block;
+			}
+			.container{
+				width:100%;
+				min-height:15px;
+			}
+			.li{
+				width:100%;
+				display: block;
+				border-top:1px solid grey;
+				height:50px;
+			}
+			.icon{
+				display: inline-block;
+				width:50px;
+				height:50px;
+				float:left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"> </div>
+		<div id="nearby-title">Nearby</div>
+		<div id="nearby" class="container">
+		</div>
+		<div id="fr-title">Friend Requests</div>
+		<div id="fr" class="container">
+		</div>
+	</body>
+</html>
